@@ -28,7 +28,7 @@ jobs:
         uses: NejcZdovc/comment-pr@v1
         with: 
          message: |
-              The subject "{subject}" found in the pull request title "{title}" should start with a lowercase character and a space after `:` is required.
+              The subject "{lint-pr-title.subject}" found in the pull request title "{lint-pr-title.title}" should start with a lowercase character and a space after `:` is required.
          identifier: "LINT_ERROR"
         env:
            GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
