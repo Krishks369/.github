@@ -29,6 +29,8 @@ jobs:
         with: 
          message: |
               The subject "{subject}" found in the pull request title "{title}" should start with a lowercase character and a space after `:` is required.
+        env:
+           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         # Comment for showing conventions
       - if: ${{ failure() }}
         uses: NejcZdovc/comment-pr@v1
