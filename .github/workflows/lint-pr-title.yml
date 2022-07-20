@@ -17,8 +17,6 @@ jobs:
       # Since this workflow is REQUIRED for a PR to be mergable, we have to have this 'if' statement in step level instead of job level.
       - if: ${{ !contains(fromJson('["asyncapi-bot", "dependabot[bot]", "dependabot-preview[bot]", "allcontributors"]'), github.actor) }}
         uses: amannn/action-semantic-pull-request@v3.2.5
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
           subjectPattern: ^(?![A-Z]).+$
           subjectPatternError: |
@@ -49,5 +47,5 @@ jobs:
                     - `refactor: ` prefix in the title indicates that PR is only related to refactoring and there is no need to trigger release.
 
                     What about MAJOR release? just add `!` to the prefix, like `fix!: ` or `refactor!: 
-    env:
+        env:
            GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
