@@ -29,6 +29,7 @@ jobs:
         with: 
          message: |
               The subject "{subject}" found in the pull request title "{title}" should start with a lowercase character and a space after `:` is required.
+         identifier: "LINT_ERROR"
         env:
            GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         # Comment for showing conventions
@@ -49,5 +50,6 @@ jobs:
                     - `refactor: ` prefix in the title indicates that PR is only related to refactoring and there is no need to trigger release.
 
                     What about MAJOR release? just add `!` to the prefix, like `fix!: ` or `refactor!: 
+         identifier: "LINT_FORMAT"
         env:
            GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
