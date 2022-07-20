@@ -48,4 +48,4 @@ jobs:
 
                     What about MAJOR release? just add `!` to the prefix, like `fix!: ` or `refactor!: 
         env:
-           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+            GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
