@@ -26,7 +26,9 @@ jobs:
             The subject "{subject}" found in the pull request title "{title}" should start with a lowercase character.
         # Comment for specifying error
         name: Comment on PR 
+
       - if: ${{ failure() }}
+
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           message: ${{ steps.lint_pr_title.outputs.ERROR_MESSAGE }}
@@ -36,6 +38,7 @@ jobs:
         with: 
          message: |
               The subject "{subject}" found in the pull request title "{title}" should start with a lowercase character and a space after `:` is required.
+         identifier: "ERROR"
         env:
            GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         # Comment for showing conventions
@@ -54,5 +57,7 @@ jobs:
                     - `test: ` prefix in the title indicates that PR is only related to tests and there is no need to trigger release.
                     - `refactor: ` prefix in the title indicates that PR is only related to refactoring and there is no need to trigger release.
                     What about MAJOR release? just add `!` to the prefix, like `fix!: ` or `refactor!: 
+         identifier: "GITHUB_COMMENT_SCRIPT"
         env:
             GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
