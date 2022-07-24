@@ -26,10 +26,10 @@ jobs:
             The subject "{subject}" found in the pull request title "{title}" should start with a lowercase character.
         # Comment for specifying error
         name: Comment on PR 
-      - if: always()
+      - if: ${{ failure() }}
         uses: marocchino/sticky-pull-request-comment@v2
         with:
-          message: ${{ steps.lint_pr_title.outputs.result }}
+          message: ${{ steps.lint_pr_title.outputs.error }}
           
       - if: ${{ failure() }}
         uses: NejcZdovc/comment-pr@v1
