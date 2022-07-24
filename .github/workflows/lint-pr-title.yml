@@ -25,11 +25,12 @@ jobs:
           subjectPatternError: |
             The subject "{subject}" found in the pull request title "{title}" should start with a lowercase character.
         # Comment for specifying error
-      - name: Comment on PR 
-        if: always()
+        name: Comment on PR 
+      - if: always()
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           message: ${{ steps.lint_pr_title.outputs.ERROR_MESSAGE }}
+          
       - if: ${{ failure() }}
         uses: NejcZdovc/comment-pr@v1
         with: 
@@ -38,6 +39,7 @@ jobs:
         env:
            GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         # Comment for showing conventions
+        
       - if: ${{ failure() }}
         uses: NejcZdovc/comment-pr@v1
         with:
