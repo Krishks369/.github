@@ -29,7 +29,7 @@ jobs:
       - if: ${{ failure() }}
         uses: marocchino/sticky-pull-request-comment@v2
         with:
-          message: ${{ steps.lint_pr_title.outputs.result }}
+          message: ${{ lint-pr-title.steps.outputs.result }}
           
       - if: ${{ failure() }}
         uses: NejcZdovc/comment-pr@v1
