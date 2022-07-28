@@ -23,10 +23,10 @@ jobs:
           subjectPattern: ^(?![A-Z]).+$
           subjectPatternError: |
             The subject "{subject}" found in the pull request title "{title}" should start with a lowercase character.
-
-      - name: Comment on PR
-        if: always()
+      
+      - if: always()
+        name: Comment on PR
         uses: marocchino/sticky-pull-request-comment@v2
         with:
-          message: ${{ jobs.steps.lint_pr_title.outputs.ERROR_MESSAGE}}
+          message: ${{ jobs.steps.lint_pr_title.outputs.result}}
            
