@@ -8,6 +8,7 @@ name: Lint PR title
 on:
   pull_request_target:
     types: [opened, reopened, synchronize, edited, ready_for_review]
+    
 jobs:
   lint-pr-title:
    name: Lint PR title
