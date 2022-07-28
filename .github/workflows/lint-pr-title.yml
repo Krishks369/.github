@@ -9,7 +9,7 @@ on:
   pull_request_target:
     types: [opened, reopened, synchronize, edited, ready_for_review]
 jobs:
-  main:
+  lint-pr-title:
    name: Lint PR title
    runs-on: ubuntu-latest
    steps:
@@ -23,8 +23,10 @@ jobs:
           subjectPattern: ^(?![A-Z]).+$
           subjectPatternError: |
             The subject "{subject}" found in the pull request title "{title}" should start with a lowercase character.
+
       - name: Comment on PR
         if: always()
         uses: marocchino/sticky-pull-request-comment@v2
         with:
-         message: ${{ jobs.steps.lint_pr_title.outputs.ERROR_MESSAGE}}
+          message: ${{ jobs.steps.lint_pr_title.outputs.ERROR_MESSAGE}}
+           
