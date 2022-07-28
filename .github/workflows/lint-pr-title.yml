@@ -8,12 +8,11 @@ name: Lint PR title
 on:
   pull_request_target:
     types: [opened, reopened, synchronize, edited, ready_for_review]
-
 jobs:
   lint-pr-title:
-    name: Lint PR title
-    runs-on: ubuntu-latest
-    steps:
+   name: Lint PR title
+   runs-on: ubuntu-latest
+   steps:
       # Since this workflow is REQUIRED for a PR to be mergable, we have to have this 'if' statement in step level instead of job level.
       - if: ${{ !contains(fromJson('["asyncapi-bot", "dependabot[bot]", "dependabot-preview[bot]", "allcontributors"]'), github.actor) }}
         uses: Krishks369/action-semantic-pull-request@1764a82e6fea458c06ea713ca8d06390b67f7e9d
@@ -24,41 +23,10 @@ jobs:
           subjectPattern: ^(?![A-Z]).+$
           subjectPatternError: |
             The subject "{subject}" found in the pull request title "{title}" should start with a lowercase character.
-        # Comment for specifying error
-        name: Comment on PR 
-      - if: always()
+
+      - name: Comment on PR
+        if: always()
         uses: marocchino/sticky-pull-request-comment@v2
         with:
-          message: ${{ jobs.lint_pr_title.outputs.result }}
-          
-      - if: ${{ failure() }}
-        uses: NejcZdovc/comment-pr@v1
-        with: 
-         message: |
-              The subject "{subject}" found in the pull request title "{title}" should start with a lowercase character and a space after `:` is required.
-         identifier: "ERROR"
-        env:
-           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        # Comment for showing conventions
-        
-      - if: ${{ failure() }}
-        uses: NejcZdovc/comment-pr@v1
-        with:
-         message: |
-                    **Conventional commits**
-                    Our repositories follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) specification. Releasing to GitHub and NPM is done with the support of [semantic-release](https://semantic-release.gitbook.io/semantic-release/).
-
-                    Pull requests should have a title that follows the specification, otherwise, merging is blocked. If you are not familiar with the specification simply ask maintainers to modify. You can also use this cheatsheet if you want:
-
-                    - `fix: ` prefix in the title indicates that PR is a bug fix and PATCH release must be triggered.
-                    - `feat: ` prefix in the title indicates that PR is a feature and MINOR release must be triggered.
-                    - `docs: ` prefix in the title indicates that PR is only related to the documentation and there is no need to trigger release.
-                    - `chore: ` prefix in the title indicates that PR is only related to cleanup in the project and there is no need to trigger release.
-                    - `test: ` prefix in the title indicates that PR is only related to tests and there is no need to trigger release.
-                    - `refactor: ` prefix in the title indicates that PR is only related to refactoring and there is no need to trigger release.
-
-                    What about MAJOR release? just add `!` to the prefix, like `fix!: ` or `refactor!: 
-         identifier: "GITHUB_COMMENT_SCRIPT"
-        env:
-            GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-            
+          message: ${{ jobs.steps.lint_pr_title.outputs.ERROR_MESSAGE}}
+           
