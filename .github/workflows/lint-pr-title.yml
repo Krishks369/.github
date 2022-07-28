@@ -31,6 +31,6 @@ jobs:
         with:
           message: |
                  ```
-                    ${{ steps.lint_pr_title.outputs.result}}
+                    ${{ steps.lint_pr_title.outputs.error_message}}
                   ```
 
