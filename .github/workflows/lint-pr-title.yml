@@ -34,7 +34,7 @@ jobs:
                    ```
                     ${{ steps.lint_pr_title.outputs.error_message}}
                    ```
-      - if: ${{ steps.lint_pr_title.outputs.error_message == NULL }}
+      - if: ${{ steps.lint_pr_title.outputs.error_message == null }}
         name: delete the comment
         uses: marocchino/sticky-pull-request-comment@v2
         with:   
