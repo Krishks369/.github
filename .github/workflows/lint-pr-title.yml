@@ -29,7 +29,16 @@ jobs:
         name: Comment on PR
         uses: marocchino/sticky-pull-request-comment@v2
         with:
+          header: comment
           message: |
                    ```
                     ${{ steps.lint_pr_title.outputs.error_message}}
                    ```
+      - if: ${{ steps.lint_pr_title.outputs.error_message == NULL }}
+        name: delete the comment
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:   
+          header: comment
+          hide: true
+          hide_classify: "OUTDATED"
+        
